@@ -12,7 +12,7 @@ SITE = {
         "working remotely from South Africa with UK clients."
     ),
     "email": "njfeldmann44@gmail.com",
-    "upwork": "#",
+    "upwork": "https://www.upwork.com/freelancers/~0167c1fafee283184b",
     "location": "South Africa",
     "how": [
         ("Fix the capture before the campaign.",
