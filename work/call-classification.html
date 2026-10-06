@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI call classification for a sales team: Nikki Feldmann</title>
+<meta name="description" content="Every answered sales call is read, classified and written back onto the contact, with the closer&#x27;s promise turned into a task.">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#140b1f; --plum:#1d1230; --panel:#281a3c; --panel2:#33234b;
+  --line:rgba(236,226,250,.13); --ink:#f1ebf8; --mist:#bcafcf; --dim:#8f82a4;
+  --orchid:#d2abf2; --pearl:#efe3fb;
+  --light:linear-gradient(90deg, rgba(246,214,228,0) 0%, #f6d6e4 20%, #d4ebf2 45%, #f3e5c9 70%, rgba(243,229,201,0) 100%);
+  --serif:"Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --sans:"Figtree", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --maxw:1040px; --col:70ch;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html,body{margin:0;background:var(--plum);color:var(--ink);font:400 17px/1.6 var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(1200px 700px at 85% -10%, rgba(220,190,255,.14), transparent 60%), linear-gradient(180deg, var(--plum) 0%, var(--night) 100%);min-height:100vh}
+a{color:var(--orchid);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--orchid);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--panel2);padding:8px 12px;border-radius:8px;z-index:9}
+.skip:focus{left:16px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.08;margin:0;letter-spacing:-.005em}
+p{margin:0 0 1em}
+ul,ol{margin:0 0 1em;padding-left:1.3em}
+li{margin:0 0 .5em}
+li::marker{color:var(--dim)}
+b{font-weight:600;color:var(--pearl)}
+
+/* top bar */
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0 8px}
+.bar .me{font-family:var(--serif);font-weight:600;font-size:21px;color:var(--ink)}
+.bar nav{display:flex;gap:22px;font-size:15px}
+.bar nav a{color:var(--mist)}
+.bar nav a[aria-current]{color:var(--ink);border-bottom:1px solid var(--orchid);padding-bottom:2px}
+
+/* hero (home) */
+.hero{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;padding:56px 0 40px}
+.hero h1{font-size:clamp(46px,8vw,86px);font-weight:500;line-height:.98}
+.hero .role{font-family:var(--serif);font-size:clamp(24px,3.2vw,34px);font-weight:500;color:var(--pearl);margin:18px 0 0;line-height:1.15;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.hero .role span{white-space:nowrap}
+.star{width:18px;height:18px;color:var(--orchid);flex:0 0 auto}
+.hero .intro{max-width:52ch;color:var(--mist);font-size:18px;margin:22px 0 0}
+.arch{width:230px;height:300px;border-radius:115px 115px 18px 18px;overflow:hidden;background:var(--panel);outline:1px solid var(--line);justify-self:end}
+.arch img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.9)}
+.light{height:2px;background:var(--light);opacity:.7;margin:8px 0 48px;border-radius:2px}
+
+/* sections */
+.section{padding:12px 0 56px}
+.section>h2{font-size:34px;margin:0 0 6px}
+.section>.sub{color:var(--mist);margin:0 0 26px;max-width:60ch}
+.work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;list-style:none;padding:0;margin:0}
+.card{display:block;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px 24px 20px;color:var(--ink);height:100%}
+.card:hover{text-decoration:none;border-color:rgba(236,226,250,.3)}
+.card .g{display:block;width:40px;height:40px;color:var(--orchid);margin:0 0 16px}
+.card .g svg{width:100%;height:100%}
+.card h3{font-size:27px;margin:0 0 10px;line-height:1.1}
+.card p{color:var(--mist);margin:0 0 14px;font-size:16px}
+.card .meta{font-size:13.5px;color:var(--dim);margin:0}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.how h3{font-size:24px;margin:0 0 8px}
+.how p{color:var(--mist);font-size:16px;margin:0}
+.contact p{max-width:52ch;color:var(--mist)}
+.contact .links{display:flex;flex-wrap:wrap;gap:12px 28px;font-size:17px}
+
+/* case study */
+.case{max-width:var(--col);padding:40px 0 32px}
+.case .meta{color:var(--mist);font-size:16px;margin:0 0 14px}
+.case h1{font-size:clamp(36px,5.4vw,56px);font-weight:500;margin:0 0 18px}
+.case .lede{font-size:20px;line-height:1.55;color:var(--pearl);margin:0 0 18px}
+.case .tools{font-size:15px;color:var(--dim)}
+.case .light{margin:28px 0 8px}
+article{max-width:var(--col);padding:0 0 40px}
+article section{padding:26px 0 6px}
+article h2{font-size:30px;margin:0 0 14px}
+article p{color:var(--ink)}
+article ul li,article ol li{color:var(--ink)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px 6px;margin:6px 0 20px}
+.node{background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:7px 12px;font-size:15px;line-height:1.3}
+.arr{width:14px;height:14px;position:relative;flex:0 0 auto}
+.arr::before{content:"";position:absolute;inset:3px 4px;border-top:1.5px solid var(--dim);border-right:1.5px solid var(--dim);transform:rotate(45deg)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:6px 0 18px}
+.pane{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.pane h4{font-size:21px;margin:0 0 8px}
+.pane p,.pane li{font-size:15.5px;color:var(--mist)}
+.pane p:last-child,.pane ul{margin-bottom:0}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:8px 0 0}
+.shot{margin:0}
+.shot-box{aspect-ratio:16/10;border:1px dashed rgba(236,226,250,.3);border-radius:12px;display:grid;place-items:center;color:var(--dim);font-size:14px;background:rgba(255,255,255,.02)}
+.shot figcaption{font-size:14.5px;color:var(--mist);margin:8px 2px 0}
+.next{border-top:1px solid var(--line);padding:26px 0 40px;max-width:var(--col)}
+.next .k{color:var(--dim);font-size:14px;margin:0 0 6px}
+.next a{font-family:var(--serif);font-size:28px;font-weight:600}
+
+/* all work */
+.client{padding:28px 0 8px}
+.client h2{font-size:34px;margin:0}
+.client .k{color:var(--dim);margin:4px 0 0}
+.grp{padding:18px 0 4px;max-width:var(--col)}
+.grp h3{font-size:22px;color:var(--pearl);margin:0 0 8px}
+.grp ul{list-style:none;padding:0;margin:0}
+.grp li{padding:9px 0;border-top:1px solid var(--line);color:var(--mist);font-size:16px}
+.grp li a{color:var(--ink)}
+.grp li a::after{content:"Case study";font-size:12.5px;color:var(--orchid);margin-left:10px;border:1px solid var(--line);border-radius:99px;padding:1px 8px;vertical-align:1px}
+
+footer{border-top:1px solid var(--line);margin-top:28px;padding:26px 0 48px;color:var(--dim);font-size:14.5px;display:flex;flex-wrap:wrap;gap:10px 28px;justify-content:space-between}
+footer a{color:var(--mist)}
+
+@media (max-width:800px){
+  .work,.how,.pair,.shots{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr;gap:28px;padding:36px 0 28px}
+  .arch{justify-self:start;width:170px;height:220px;border-radius:85px 85px 14px 14px;order:-1}
+  .bar nav{gap:16px;font-size:14px}
+  .flow{flex-direction:column;align-items:stretch}
+  .arr{width:100%;height:14px}
+  .arr::before{inset:0 0 0 calc(50% - 7px);width:10px;height:10px;transform:rotate(135deg);border-width:1.5px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="wrap bar"><a class="me" href="../index.html">Nikki Feldmann</a><nav aria-label="Site"><a href="../index.html#work" aria-current="page">Work</a><a href="../all-work.html">All work</a><a href="../index.html#contact">Contact</a></nav></header>
+<main id="main" class="wrap"><header class="case"><p class="meta">UK outdoor wellness manufacturer. July to September 2026.</p><h1>AI call classification for a sales team</h1><p class="lede">After a sales call, the closer was meant to write up what was said, what was promised and when to follow up. In practice nothing was written down, promises were forgotten and leads went cold. I built a system that reads every call transcript, classifies the outcome, writes a structured note onto the contact and tells the right person what was promised.</p><p class="tools">GoHighLevel, Zapier, OpenAI, Google Sheets, WhatsApp</p><div class="light" aria-hidden="true"></div></header><article><section><h2>The problem</h2><p>The CRM showed call transcripts on screen, but its own workflow engine could not read them. I tested every candidate transcript variable in a notification and each one came back blank. An existing call workflow was firing and producing nothing: no tag, no summary, no alert.</p><p>The business needed every answered call read, classified and written back automatically, so the follow-up workflows could act on the outcome and the team could see a readable record without listening to recordings.</p></section><section><h2>What I built</h2><ul><li>A twenty step automation that grew through seven published versions over the summer, one fault at a time.</li><li>The CRM workflow cut down to two steps: trigger on a completed call, then send the contact to the automation.</li><li>A structured call note written onto every contact: summary, outcome, product discussed, objections, next touch, what the closer promised, what the customer will do, then the full transcript.</li><li>A daily call log in a spreadsheet, a task for the closer carrying the promise, and a WhatsApp alert to me.</li><li>A one page explainer for the owner on how the classifier decides, and how to correct it.</li><li>A pre-call brief pinned to the contact's next appointment, so the closer sees it in the mobile app before dialling.</li></ul></section><section><h2>How it works</h2><div class="flow"><span class="node">Call ends</span><span class="arr" aria-hidden="true"></span><span class="node">CRM sends the contact</span><span class="arr" aria-hidden="true"></span><span class="node">Wait for the transcript</span><span class="arr" aria-hidden="true"></span><span class="node">Fetch it through the API</span><span class="arr" aria-hidden="true"></span><span class="node">Flatten into speaker text</span><span class="arr" aria-hidden="true"></span><span class="node">AI classifies seven fields</span><span class="arr" aria-hidden="true"></span><span class="node">Note, task, sheet row, alert</span><span class="arr" aria-hidden="true"></span><span class="node">Outcome routes the follow-up</span></div><p>The intelligence lives outside the CRM because the CRM cannot read its own transcripts. The automation waits for transcription to finish, then calls the CRM's API to find the right call message and pull the transcript. A code step flattens it into labelled speaker text, and the AI step receives only that, with fixed written instructions: work out which speaker is the salesperson and return exactly seven fields, with the outcome limited to one of four words.</p><p>I proved every API endpoint in an API client before writing a line of automation. That became a standing rule after a one character typo in an endpoint caused three days of silent failures.</p></section><section><h2>Problems I hit, and the fixes</h2><ul><li><b>Daily error emails next to successful runs.</b> Very short calls have a message record but never a transcript. I added a found flag and a filter so those stop cleanly instead of erroring.</li><li><b>Doubled surnames in alerts.</b> The full name had been written into the first name field on hundreds of contacts. I built a fallback chain for the alert name and exported the affected contacts for clean-up.</li><li><b>A 24 minute call that never arrived.</b> Three faults stacked on one night: a trigger filter that depended on the field the automation itself fills, a wait step that stopped a second call enrolling, and two classifiers disagreeing on the spelling of one word. I removed the filter that night and verified fresh runs the next morning.</li><li><b>Appointment notes refused by the API.</b> The integration token lacked one permission. Added, tested on a throwaway appointment, published.</li></ul></section><section><h2>Result</h2><p>Every answered call that produces a transcript now leaves a readable note, a task with the closer's promise, a sheet row and an alert. The outcome drives two follow-up routers. The team told me they loved the note format, and from the last version the closer sees a pre-call brief on the appointment itself.</p></section><section><h2>Visuals coming to this page</h2><div class="shots"><figure class="shot"><div class="shot-box"><span>Screenshot to add</span></div><figcaption>A redacted call note as it appears on a contact: summary, outcome, promise, next touch, transcript below.</figcaption></figure><figure class="shot"><div class="shot-box"><span>Screenshot to add</span></div><figcaption>The automation's step list, version 15, with the fault each version fixed written alongside.</figcaption></figure><figure class="shot"><div class="shot-box"><span>Screenshot to add</span></div><figcaption>The one page explainer the owner received on how classification works.</figcaption></figure></div></section></article><div class="next"><p class="k">Next</p><a href="live-transfer-lead-system.html">A live transfer lead system for a Facebook ad campaign</a></div></main>
+<footer class="wrap"><span>Nicola Jade Feldmann. Based in South Africa, working with UK clients.</span><span><a href="mailto:njfeldmann44@gmail.com">njfeldmann44@gmail.com</a></span></footer>
+</body>
+</html>
