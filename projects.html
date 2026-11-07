@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nikki's Client Projects</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--soft:#F1EBFA;--tile:#E3D7F5;--lav:#A98BD9;--accent:#6E52A3;--ink:#17121C;--muted:#4F4559;--line:#E4DAF2}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{font-family:Poppins,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.5}
+nav{position:sticky;top:0;z-index:5;background:#fff;border-bottom:2px solid var(--line);overflow-x:auto;white-space:nowrap}
+nav .in{max-width:1080px;margin:0 auto;padding:0 16px;display:flex;gap:4px}
+nav a{display:inline-block;padding:16px 12px;font-weight:700;font-size:14px;color:var(--muted);text-decoration:none;border-bottom:3px solid transparent}
+nav a:hover,nav a.on{color:var(--ink);border-bottom-color:var(--lav)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+header{background:var(--soft);padding:48px 0 40px}
+.kick{letter-spacing:.18em;text-transform:uppercase;font-size:12px;font-weight:700;color:var(--accent)}
+h1{font-weight:800;font-size:clamp(34px,6vw,56px);line-height:1.05;margin:10px 0 12px}
+header p{max-width:620px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:28px}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--tile);border-radius:10px;padding:16px}
+.stat b{display:block;font-weight:800;font-size:32px;line-height:1}
+.stat span{font-size:13px;font-weight:600;color:var(--muted)}
+section{padding:44px 0;border-bottom:2px solid var(--line)}
+h2{font-weight:800;font-size:28px;margin:4px 0 4px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.card{border:2px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.card h3{font-weight:700;font-size:17px;line-height:1.25}
+.card p{font-size:14px;color:var(--muted);flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{background:var(--soft);font-size:11px;font-weight:700;padding:3px 8px;border-radius:5px}
+.card a{align-self:flex-start;background:var(--tile);color:var(--ink);font-weight:700;font-size:13px;text-decoration:none;padding:8px 14px;border-radius:6px}
+.card a:hover{background:var(--lav)}
+footer{padding:28px 16px;text-align:center;font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<nav><div class="in" id="nav"></div></nav>
+<header><div class="wrap">
+<div class="kick">Systems Lead · Jul to Nov 2026</div>
+<h1>Nikki's client projects</h1>
+<p>Everything I designed and built as Systems Lead for a UK outdoor wellness manufacturer: CRM automation, a custom MCP server, sales tools, client proposals, product pages, trade show material and internal tools. Every card opens the live page.</p>
+<div class="stats">
+<div class="stat"><b>511</b><span>commits</span></div>
+<div class="stat"><b>16</b><span>repositories</span></div>
+<div class="stat"><b>200+</b><span>HTML pages built</span></div>
+<div class="stat"><b>115k</b><span>lines written or rewritten</span></div>
+</div>
+</div></header>
+<main id="main"></main>
+<footer>Built by <a href="https://github.com/nik-nasty">Nikki</a> · GitHub history chart on my <a href="https://github.com/nik-nasty">profile</a></footer>
+<script>
+const B="https://barrelsaunauk.github.io/";
+const S=[
+{id:"crm",t:"CRM and automation",s:"GoHighLevel build, training and the custom server that lets AI run the CRM.",c:[
+["GoHighLevel MCP server","My own MCP server on Cloudflare Workers: 48 CRM tools, guarded sends and deletes, call routing and install tracking agents.","TypeScript,Cloudflare,MCP","https://github.com/nik-nasty/gohighlevel-mcp"],
+["GoHighLevel user manual","Role based training manual for office, call team and sales.","HTML,GHL","internal/gohighlevel_user_manual.html"],
+["Meta ad contact journey","Map of every automated touch a Meta ad lead gets, step by step.","GHL,Automation","internal/wave2_contact_journey.html"],
+["Builds calendar","Installation windows plotted from CRM fields.","HTML,JS,GHL","internal/builds_calendar.html"],
+["Dashboard banner","Header panel embedded in the CRM dashboard.","HTML,GHL","internal/dashboard_banner.html"]]},
+{id:"sales",t:"Sales tools",s:"Pages and tools the sales team and partners use every day.",c:[
+["Product configurator","Build-your-own configurator for pricing a custom build.","HTML,JS","team/configurator.html"],
+["Partner estimate builder","White label estimates for third-party sellers.","HTML,JS","team/partner_estimate.html"],
+["Partner earnings","Commission calculator for partner sellers.","HTML,JS","team/partner_earnings.html"],
+["Closer's guide","Sales playbook for the closing team.","HTML","team/bsuk_closers_guide.html"],
+["Seller guide","Product and options guide for partner sellers.","HTML","team/bsuk_seller_guide.html"],
+["Your build estimate","Customer-facing estimate explainer.","HTML","team/your_build_estimate.html"],
+["Estimate sent brochure","Brochure page customers get with their estimate.","HTML","team/estimate_sent_brochure.html"],
+["What happens next","Next steps page after an estimate.","HTML","team/estimate_sent_what_next.html"],
+["Deposit paid build timeline","Clear timeline once a deposit lands.","HTML","internal/deposit_paid_build_timeline.html"],
+["Pre-call brochure","Short brochure sent before a design call.","HTML","internal/build_chat_brief.html"],
+["More than saunas","Range showcase page for marketing.","HTML","internal/more_than_saunas.html"],
+["Venue agreement","Agreement page for venue partners.","HTML","team/venue_agreement.html"]]},
+{id:"proposals",t:"Client proposals",s:"Custom proposal pages built for individual commercial and private clients, with renders and options.",c:[
+["Holiday let proposal","Two option proposal for a nine-apartment holiday let.","HTML,Renders","bsukcustomproject/alan_hodari.html"],
+["Campsite wellness area","Mobile sauna, plunges and decking across a holiday park.","HTML,Renders","bsukcustomproject/calvin_clark.html"],
+["Shepherd's hut proposal","18 ft shepherd's hut with sauna and bath.","HTML,Renders","bsukcustomproject/chris_hollis.html"],
+["Mobile sauna and ice bath trailers","Globe sauna trailer plus a mobile ice bath station.","HTML,Renders","bsukcustomproject/grant_and_gareth.html"],
+["Modern sauna and Double Dipper","Proposal rebuilt around the client's own glass front.","HTML,Renders","bsukcustomproject/james-mccarthy.html"],
+["Private client proposal","Custom build proposal.","HTML","bsukcustomproject/lee_evans.html"],
+["University college proposal","Board meeting proposal for a college wellness space.","HTML,Renders","bsukcustomproject/linacre_stoke_house.html"],
+["College site option","Alternative site option for the same college.","HTML,Renders","bsukcustomproject/oxford_stoke_house.html"],
+["Sauna and hot tub combi","Combi unit proposal for a guest house.","HTML,Renders","bsukcustomproject/neil_armstrong.html"],
+["Treatment room proposal","Treatment room and ice bath decking.","HTML,Renders","bsukcustomproject/nikki_burnett.html"],
+["Treatment room before and after","Before and after visualisation of the site.","HTML,Renders","bsukcustomproject/nikki_burnett_before_and_after.html"],
+["Poolside sauna and steam room","Sauna, steam room and ice bath under one roof.","HTML,Renders","bsukcustomproject/poolside_sauna_and_steam_room.html"]]},
+{id:"products",t:"Product pages",s:"Shareable product pages, brochures and owner guides.",c:[
+["Web brochure","The full range in one shareable brochure.","HTML","explore/brochure.html"],
+["Barrel sauna brochure","Barrel sauna range and options.","HTML","explore/barrel_sauna_brochure.html"],
+["Hot tub guide","Hot tub range and choices.","HTML","explore/hot_tub_guide.html"],
+["Circle and square hot tubs","Hot tub shapes compared.","HTML","explore/circle_and_square_hot_tubs.html"],
+["Cold plunge range","Single and double plunge specs and photos.","HTML","explore/cold_plunge_range.html"],
+["Double Dipper","Wood fired tub that also runs cold.","HTML","explore/the_double-dipper.html"],
+["Glamping pods","Eco glamping pod range.","HTML","explore/eco_glamping_pods.html"],
+["Commercial mobile saunas","Mobile sauna page for commercial buyers.","HTML","explore/mobile_saunas.html"],
+["Grant service","Grant finder service page.","HTML","explore/grant_service.html"],
+["Leave your details","Enquiry page wired into the CRM.","HTML,Webhooks","explore/leave_your_details.html"],
+["Owner's brochure","Brochure for existing owners.","HTML","owners/brochure.html"],
+["Electric hot tub guide","Owner guide for electric hot tubs.","HTML","owners/electric_hot_tub_guide.html"],
+["Hot tub handbook","Full hot tub owner handbook.","HTML","owners/hot_tub_handbook.html"],
+["Sauna heater guide","Owner guide for sauna heaters.","HTML","owners/sauna_heater_guide.html"]]},
+{id:"expo",t:"Trade show",s:"Material for a national trade show stand.",c:[
+["Overall brochure","Company brochure, folding view.","HTML,Print","expo/overall_view.html"],
+["Commercial brochure","Brochure for commercial buyers.","HTML,Print","expo/commercial_brochure.html"],
+["General brochure","Brochure for the public.","HTML,Print","expo/general_brochure.html"],
+["Stand page","Stand landing page.","HTML","explore/stand.html"],
+["Stand site plan v1","Layout of the stand.","HTML","expo/site_plan_version_1.html"],
+["Stand site plan v3","Revised stand layout.","HTML","expo/site_plan_version_3.html"],
+["Magazine photo selector","Tool for choosing magazine photos.","HTML,JS","expo/magazine_booklet_photo_selector.html"]]},
+{id:"tools",t:"Internal tools",s:"Tools I built for the team to work faster.",c:[
+["Render layout tool","Drag and drop scene builder for composing proposal renders.","HTML,JS","internal/proposal_rendering_tool.html"],
+["3D site planner","Places builds on a customer's site in 3D.","HTML,JS,3D","internal/render_3d_site_template.html"],
+["3D sauna models","Interactive 3D models of the straight edge range.","HTML,JS,3D","internal/straight_edge_3d_models.html"],
+["Content plan","Filming and social content plan.","HTML","internal/content_plan.html"],
+["Shoot plan","Shoot plan page that saves notes into the CRM.","HTML,Apps Script,Webhooks","team/shoot_plan.html"],
+["Handover sign-off form","Phone form for build handover with signatures and PDF.","HTML,JS,PDF","internal/bsuk_handover.html"]]},
+{id:"brand",t:"Sister brand",s:"Landing pages for a new standalone hot tub brand.",c:[
+["Landing page 1","First landing page concept.","HTML","vale/landing_page_1.html"],
+["Landing page 2","Second landing page concept.","HTML","vale/landing_page_2.html"],
+["Landing page 3","Third landing page concept.","HTML","vale/landing_page_3.html"],
+["Brand overview","Sister brand range page.","HTML","explore/vale_hot_tubs.html"]]}
+];
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+document.getElementById("nav").innerHTML=S.map(x=>`<a href="#${x.id}">${x.t}</a>`).join("");
+document.getElementById("main").innerHTML=S.map(x=>`<section id="${x.id}"><div class="wrap"><h2>${x.t}</h2><p class="sub">${x.s} ${x.c.length} projects.</p><div class="grid">${x.c.map(([n,d,t,u])=>`<div class="card"><h3>${esc(n)}</h3><p>${esc(d)}</p><div class="tags">${t.split(",").map(z=>`<span>${z}</span>`).join("")}</div><a href="${u.startsWith("http")?u:B+u}" target="_blank" rel="noopener">Open live</a></div>`).join("")}</div></div></section>`).join("");
+const links=[...document.querySelectorAll("nav a")];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>l.classList.toggle("on",l.hash==="#"+e.target.id))}),{rootMargin:"-40% 0px -55% 0px"});
+document.querySelectorAll("section").forEach(s=>io.observe(s));
+</script>
+</body>
+</html>
