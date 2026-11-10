@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>See It In Your Garden</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#0C240E; --green2:#143a19; --olive:#627327;
+  --honey:#C08B41; --honey-d:#b07d38;
+  --ink:#16201a; --ink-l:#4f5a53; --line:rgba(12,36,14,0.14);
+  --shadow:0 18px 40px rgba(12,36,14,0.16); --shadow-s:0 8px 20px rgba(12,36,14,0.14);
+  --face:'Poppins', Arial, Helvetica, sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+html,body{background:#fff;}
+body{font-family:var(--face);font-weight:300;color:var(--ink-l);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+img{display:block;max-width:100%;}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px;}
+h1,h2,h3{font-weight:700;color:var(--ink);line-height:1.1;letter-spacing:-0.5px;}
+.hl{color:var(--honey);}
+.note{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;color:var(--honey);font-weight:400;margin-bottom:16px;}
+.note::before{content:"";width:28px;height:1px;background:currentColor;}
+.note svg{width:12px;height:14px;}
+.dark .note,.on-dark .note{color:rgba(255,255,255,0.7);}
+.pill{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:40px;padding:16px 34px;font-family:var(--face);font-size:15px;font-weight:400;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s;}
+.pill svg{width:16px;height:16px;transition:transform .2s;}
+.pill:hover svg{transform:translateX(3px);}
+.pill.honey{background:var(--honey);color:#fff;box-shadow:0 10px 24px rgba(192,139,65,0.35);}
+.pill.honey:hover{background:var(--honey-d);transform:translateY(-1px);}
+.pill.white{background:#fff;color:var(--green);box-shadow:0 10px 24px rgba(0,0,0,0.25);}
+.pill.white:hover{transform:translateY(-1px);}
+.pill.dark{background:var(--green);color:#fff;}
+.pill.dark:hover{background:#163c1b;}
+.pill[disabled]{opacity:0.3;cursor:default;transform:none;}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.in{opacity:1;transform:none;}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;background:var(--green);}
+.hero .pic{position:relative;width:100%;height:clamp(520px,40vw,720px);background-size:cover !important;background-position:100% bottom !important; background:url('https://files.leadconnectorhq.com/file/6af32c16923b4bc10958cd57/gemini-generated-image-eosu5neosu5neosu.jpeg') center bottom/100% auto no-repeat;}
+.hero .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(270deg,rgba(12,36,14,0.78) 0%,rgba(12,36,14,0.45) 32%,rgba(12,36,14,0) 58%);}
+.hero .txt{position:absolute;inset:0;display:flex;align-items:center;}
+.hero .txt .wrap{width:100%;display:flex;justify-content:flex-end;}
+.hero .box{max-width:430px;color:#fff;}
+.hero h1{font-size:clamp(34px,3.6vw,54px) !important;}
+.hero h1{color:#fff;font-size:clamp(36px,4.4vw,62px);margin:18px 0 14px;text-shadow:0 2px 24px rgba(0,0,0,0.25);}
+.hero h1 .hl{color:#fff;font-weight:300;font-style:italic;}
+.hero p{color:rgba(255,255,255,0.92);font-size:clamp(15px,1.2vw,18px);margin-bottom:26px;text-shadow:0 1px 12px rgba(0,0,0,0.3);}
+.live{display:inline-flex;align-items:center;gap:10px;background:rgba(12,36,14,0.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.22);color:#fff;border-radius:40px;padding:8px 16px 8px 12px;font-size:13px;}
+.live .dot{position:relative;width:9px;height:9px;border-radius:50%;background:#3fd15a;}
+.live .dot::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid #3fd15a;opacity:0;animation:ping 1.8s ease-out infinite;}
+@keyframes ping{0%{transform:scale(.4);opacity:.9;}100%{transform:scale(1.3);opacity:0;}}
+.seats{display:flex;align-items:center;gap:12px;margin-top:22px;font-size:13px;color:rgba(255,255,255,0.85);}
+.seats .row{display:flex;gap:6px;}
+.seats i{width:12px;height:12px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.8);}
+.seats i.t{background:#fff;border-color:#fff;}
+
+/* STRIP */
+.strip{background:var(--green);color:#fff;}
+.strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);}
+.strip .it{display:flex;align-items:center;gap:14px;padding:24px 18px;border-left:1px solid rgba(255,255,255,0.1);}
+.strip .it:first-child{border-left:0;}
+.strip svg{flex:0 0 30px;width:30px;height:30px;stroke:#fff;opacity:0.9;}
+.strip .k{font-size:14px;font-weight:400;line-height:1.3;}
+.strip .s{font-size:12px;color:rgba(255,255,255,0.6);}
+
+/* HOW */
+.how{padding:96px 0 84px;}
+.how .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:46px;}
+.how h2{font-size:clamp(30px,3.4vw,46px);max-width:560px;}
+.how .lede{max-width:380px;}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+.polar{position:relative;background:#fff;padding:12px 12px 22px;box-shadow:var(--shadow);border-radius:3px;transition:transform .3s;}
+.steps .polar:nth-child(1){transform:rotate(-1.4deg);}
+.steps .polar:nth-child(2){transform:rotate(1deg) translateY(14px);}
+.steps .polar:nth-child(3){transform:rotate(-0.8deg);}
+.steps .polar:hover{transform:rotate(0) translateY(-4px);}
+.polar .ph{aspect-ratio:1/1;overflow:hidden;background:#fff;}
+.polar .big{position:absolute;top:-26px;right:14px;font-size:64px;font-weight:700;color:#fff;-webkit-text-stroke:1.5px var(--green);line-height:1;}
+.polar h3{font-size:19px;margin:16px 4px 6px;}
+.polar p{font-size:14px;margin:0 4px;}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:4px;width:100%;height:100%;}
+.gal img{width:100%;height:100%;object-fit:cover;}
+.gal img:first-child{grid-column:span 2;grid-row:span 2;}
+.quad{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;width:100%;height:100%;}
+.quad img{width:100%;height:100%;object-fit:cover;}
+.quad .q{background:var(--green);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px;}
+.quad .q .qm{font-weight:700;font-size:34px;line-height:1;margin-bottom:6px;}
+.quad .q span{font-size:12px;line-height:1.3;}
+
+/* BEFORE AFTER */
+.ba{background:var(--green);padding:96px 0;color:#fff;}
+.ba h2{color:#fff;font-size:clamp(30px,3.4vw,46px);margin-bottom:10px;}
+.ba .lede{color:rgba(255,255,255,0.75);max-width:520px;margin-bottom:30px;}
+.tabs{display:flex;gap:8px;margin-bottom:34px;flex-wrap:wrap;}
+.tab{background:transparent;border:1px solid rgba(255,255,255,0.3);color:#fff;border-radius:40px;padding:9px 20px;font-family:var(--face);font-size:14px;cursor:pointer;font-weight:300;}
+.tab.on{background:#fff;color:var(--green);border-color:#fff;font-weight:400;}
+.pair{display:grid;grid-template-columns:1fr auto 1fr;gap:26px;align-items:center;}
+.pair .polar{padding:10px 10px 16px;}
+.pair .polar:first-child{transform:rotate(-1.5deg);}
+.pair .polar:last-child{transform:rotate(1.2deg);}
+.pair .ph{aspect-ratio:4/3;}
+.pair .ph img{width:100%;height:100%;object-fit:cover;transition:opacity .35s;}
+.chip{position:absolute;top:22px;left:22px;background:rgba(12,36,14,0.82);color:#fff;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;border-radius:30px;padding:6px 14px;z-index:2;}
+.chip.after{background:#fff;color:var(--green);}
+.arrow{width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;}
+.arrow svg{width:26px;height:26px;stroke:var(--green);}
+
+/* FORM */
+.formsec{padding:100px 0 96px;}
+.formsec .head{max-width:640px;margin-bottom:36px;}
+.formsec h2{font-size:clamp(30px,3.4vw,46px);margin-bottom:10px;}
+.grid{display:grid;grid-template-columns:1fr 320px;gap:26px;align-items:start;}
+.card{background:#fff;border-radius:22px;padding:34px 34px 28px;box-shadow:var(--shadow);border:1px solid var(--line);}
+.prog{display:flex;gap:6px;margin-bottom:12px;}
+.prog span{flex:1;height:4px;border-radius:4px;background:#e4e8e4;transition:background .3s;}
+.prog span.on{background:var(--green);}
+.stepnum{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--ink-l);margin-bottom:18px;}
+.card h3{font-size:28px;margin-bottom:6px;}
+.card .help{font-size:14px;margin-bottom:22px;}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.tile{position:relative;background:#fff;padding:7px 7px 12px;border-radius:4px;box-shadow:var(--shadow-s);cursor:pointer;border:2px solid transparent;font-family:var(--face);text-align:left;transition:transform .15s,border-color .15s;}
+.tile:hover{transform:translateY(-3px);}
+.tile .ph{aspect-ratio:1/1;overflow:hidden;background:#fff;}
+.tile .ph img{width:100%;height:100%;object-fit:cover;transition:transform .4s;}
+.tile:hover .ph img{transform:scale(1.04);}
+.tile .q{width:100%;height:100%;background:var(--green);color:#fff;font-size:44px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.tile .lab{font-size:13px;color:var(--ink);margin-top:10px;line-height:1.3;font-weight:400;}
+.tile.sel{border-color:var(--green);}
+.tile .tick{position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;font-size:13px;display:none;align-items:center;justify-content:center;box-shadow:0 0 0 3px #fff;}
+.tile.sel .tick{display:flex;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px;}
+.opt{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 18px;font-family:var(--face);font-size:15px;color:var(--ink);text-align:left;cursor:pointer;font-weight:300;display:flex;align-items:center;gap:12px;transition:border-color .15s;}
+.opt::before{content:"";flex:0 0 18px;height:18px;border-radius:50%;border:1.5px solid rgba(12,36,14,0.35);}
+.opt:hover{border-color:var(--green);}
+.opt.sel{border:2px solid var(--green);padding:14px 17px;font-weight:400;}
+.opt.sel::before{border:5px solid var(--green);}
+.sub{font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink);margin:4px 0 12px;font-weight:400;}
+.drop{display:block;border:1.5px dashed rgba(12,36,14,0.3);border-radius:18px;padding:34px 18px;text-align:center;cursor:pointer;background:#fff;transition:border-color .15s;}
+.drop:hover{border-color:var(--green);}
+.drop svg{width:36px;height:36px;stroke:var(--green);margin:0 auto 10px;}
+.drop .big{font-size:16px;color:var(--ink);font-weight:400;}
+.drop .sm{font-size:13px;}
+.thumbs{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px;}
+.thumbs .t{position:relative;width:100px;background:#fff;padding:5px 5px 9px;box-shadow:var(--shadow-s);border-radius:3px;}
+.thumbs .t:nth-child(odd){transform:rotate(-2deg);}
+.thumbs .t:nth-child(even){transform:rotate(2deg);}
+.thumbs .t img{width:100%;height:72px;object-fit:cover;}
+.thumbs .t button{position:absolute;top:-9px;right:-9px;width:24px;height:24px;border-radius:50%;border:0;background:var(--green);color:#fff;cursor:pointer;font-size:12px;}
+.tips{font-size:13px;margin-top:14px;}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.field label{display:block;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-l);margin-bottom:7px;}
+.field input{width:100%;font-family:var(--face);font-size:16px;font-weight:300;color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:14px 15px;background:#fff;}
+.field input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(12,36,14,0.08);}
+.fine{font-size:12px;margin-top:14px;}
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:28px;border-top:1px solid var(--line);padding-top:22px;}
+.back{background:#fff;border:1px solid var(--line);border-radius:40px;padding:12px 24px;font-family:var(--face);font-size:14px;color:var(--ink);cursor:pointer;}
+.back:hover{border-color:var(--green);}
+.back.hide{visibility:hidden;}
+
+.sum{background:#fff;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);position:sticky;top:20px;}
+.sum .head{background:var(--green);color:#fff;padding:20px 22px;}
+.sum .head .t{font-size:11px;letter-spacing:0.25em;text-transform:uppercase;}
+.sum .head .s{font-size:13px;color:rgba(255,255,255,0.65);}
+.sum .body{padding:8px 22px 22px;}
+.sum .row{padding:12px 0;border-bottom:1px solid var(--line);}
+.sum .k{font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-l);}
+.sum .v{font-size:14px;color:var(--ink);font-weight:400;}
+.sum .v.empty{color:#a3aaa5;font-weight:300;}
+.sum .mini{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.sum .mini img{width:42px;height:42px;object-fit:cover;border-radius:4px;}
+.sum .spots{margin-top:16px;font-size:13px;color:var(--ink);}
+.sum .spots .row2{display:flex;gap:5px;margin-top:8px;}
+.sum .spots i{flex:1;height:8px;border-radius:8px;background:#e4e8e4;}
+.sum .spots i.t{background:var(--green);}
+
+.done{text-align:center;padding:14px 4px 4px;}
+.done .badge{width:76px;height:76px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:32px;}
+.done h3{font-size:32px;margin:6px 0 12px;}
+.done p{max-width:520px;margin:0 auto 14px;}
+.next{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:26px 0 8px;text-align:left;}
+.next div{border:1px solid var(--line);border-radius:16px;padding:16px 18px;font-size:14px;}
+.next .nb{display:block;font-weight:700;color:var(--ink);font-size:14px;margin-bottom:3px;}
+
+/* https://files.leadconnectorhq.com/file/6a8561324aaffc55cddd1f1c/2-saunas-2-ice-baths-wood-stack-wide-angle BAND */
+.band{position:relative;min-height:540px;display:flex;align-items:center;background:linear-gradient(90deg,rgba(12,36,14,0.9) 0%,rgba(12,36,14,0.6) 45%,rgba(12,36,14,0.1) 100%),url('https://files.leadconnectorhq.com/file/6a8561324aaffc55cddd1f1c/2-saunas-2-ice-baths-wood-stack-wide-angle') center/cover no-repeat,var(--green);}
+.band .wrap{width:100%;padding-top:90px;padding-bottom:90px;}
+.band h2{color:#fff;font-size:clamp(30px,3.4vw,46px);max-width:540px;margin-bottom:14px;}
+.band p{color:rgba(255,255,255,0.85);max-width:460px;margin-bottom:28px;}
+
+/* FAQ */
+.faq{padding:96px 0 110px;}
+.faq .inner{display:grid;grid-template-columns:360px 1fr;gap:50px;align-items:start;}
+.faq h2{font-size:clamp(30px,3.4vw,42px);}
+.qa{border-top:1px solid var(--line);}
+.qa:last-child{border-bottom:1px solid var(--line);}
+.qa button{width:100%;background:none;border:0;font-family:var(--face);font-size:17px;color:var(--ink);font-weight:400;text-align:left;padding:22px 40px 22px 0;cursor:pointer;position:relative;}
+.qa button::after{content:"";position:absolute;right:6px;top:50%;width:12px;height:12px;border-right:1.5px solid var(--ink);border-bottom:1.5px solid var(--ink);transform:translateY(-70%) rotate(45deg);transition:transform .25s;}
+.qa.open button::after{transform:translateY(-30%) rotate(-135deg);}
+.qa .a{max-height:0;overflow:hidden;transition:max-height .3s ease;}
+.qa .a p{padding:0 40px 22px 0;}
+.qa.open .a{max-height:240px;}
+
+/* FOOTER */
+.foot{background:var(--green);border-radius:26px 26px 0 0;padding:52px 0 36px;text-align:center;}
+.foot .logo{width:110px;margin:0 auto 12px;}
+.foot .signoff{color:#fff;font-size:16px;font-weight:400;}
+.foot .dom{font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin:4px 0 26px;}
+.sigcard{background:#fff;border-radius:18px;max-width:640px;margin:0 auto;overflow:hidden;}
+.sigcard img{width:100%;height:auto;}
+
+.dev{max-width:1120px;margin:0 auto;padding:22px 16px 40px;font-family:var(--face);}
+.dev details{border:1px dashed rgba(12,36,14,0.3);border-radius:14px;padding:14px 18px;}
+.dev summary{cursor:pointer;font-size:13px;color:var(--ink);}
+.dev .ctrl{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0;}
+.dev pre{font-family:'SF Mono',Menlo,Consolas,monospace;font-size:12px;border:1px solid var(--line);border-radius:10px;padding:14px;white-space:pre-wrap;word-break:break-word;color:var(--ink);}
+
+@media(max-width:900px){
+  .hero{display:flex;flex-direction:column;}
+  .hero .pic{height:320px !important;background-size:cover !important;background-position:45% bottom !important;}
+  .hero .pic::after{display:none;}
+  .hero .txt{position:static;background:var(--green);}
+  .hero .txt .wrap{justify-content:flex-start;padding-top:30px;padding-bottom:34px;}
+  .strip .wrap{grid-template-columns:1fr 1fr;}
+  .strip .it{border-left:0;border-top:1px solid rgba(255,255,255,0.1);padding:18px 8px;}
+  .how .head{flex-direction:column;align-items:flex-start;}
+  .steps{grid-template-columns:1fr;gap:44px;max-width:460px;margin:0 auto;}
+  .steps .polar:nth-child(2){transform:rotate(1deg);}
+  .pair{grid-template-columns:1fr;gap:18px;}
+  .arrow{margin:0 auto;transform:rotate(90deg);width:52px;height:52px;}
+  .grid{grid-template-columns:1fr;}
+  .sum{position:static;}
+  .tiles{grid-template-columns:repeat(2,1fr);}
+  .opts{grid-template-columns:1fr;}
+  .fields{grid-template-columns:1fr;}
+  .card{padding:24px 18px 22px;}
+  .next{grid-template-columns:1fr;}
+  .faq .inner{grid-template-columns:1fr;gap:20px;}
+  .band{min-height:460px;}
+  .how,.ba,.formsec,.faq{padding-top:70px;padding-bottom:70px;}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="pic" role="img" aria-label="Two barrel saunas in a field"></div>
+  <div class="txt"><div class="wrap"><div class="box">
+    <span class="live"><span class="dot"></span><span id="heroLive">Round one is open</span></span>
+    <h1>See it in <span class="hl">your</span> garden</h1>
+    <p>Send us a few photos of your space. We will make you a presentation of your build, placed in your own garden, by hand.</p>
+    <a class="pill white" href="#apply" id="heroBtn"><span id="heroBtnTxt">Claim a spot</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+    <div class="seats"><div class="row" id="heroSeats"></div><span id="heroSeatTxt"></span></div>
+  </div></div></div>
+</header>
+
+<section class="strip">
+  <div class="wrap">
+    <div class="it"><svg viewBox="0 0 30 30" fill="none" stroke-width="1.4"><path d="M6 24c4-1 6-4 7-9M13 15c3-6 7-8 11-9-1 4-3 8-9 11"/><path d="M4 26h22"/></svg><div><div class="k">Made by hand</div><div class="s">Every one, start to finish</div></div></div>
+    <div class="it"><svg viewBox="0 0 30 30" fill="none" stroke-width="1.4"><path d="M5 24V12l10-7 10 7v12z"/><path d="M12 24v-7h6v7"/></svg><div><div class="k">Built in Wales</div><div class="s">In our own workshop</div></div></div>
+    <div class="it"><svg viewBox="0 0 30 30" fill="none" stroke-width="1.4"><circle cx="15" cy="15" r="10"/><path d="M10 15l3.5 3.5L20 12"/></svg><div><div class="k">No prices, no pressure</div><div class="s">Just a proper look</div></div></div>
+    <div class="it"><svg viewBox="0 0 30 30" fill="none" stroke-width="1.4"><rect x="5" y="7" width="20" height="18" rx="2"/><path d="M5 12h20M10 4v6M20 4v6"/></svg><div><div class="k">Ten gardens a round</div><div class="s">Then we close it</div></div></div>
+  </div>
+</section>
+
+<section class="how">
+  <div class="wrap">
+    <div class="head reveal">
+      <div>
+        <div class="note">How it works <svg viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v11M1.5 8L6 12.5 10.5 8"/></svg></div>
+        <h2>Three steps, then we get to work</h2>
+      </div>
+      <p class="lede">No prices and no hard sell. Just a proper look at how it would sit in your space, so you can picture it before you decide anything.</p>
+    </div>
+    <div class="steps">
+      <div class="polar reveal"><span class="big">1</span><div class="ph"><div class="gal"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a9b2fe2ac5d03a1095eafc7.png" alt=""><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6ac8b5f489da6e6f9bd0c01f.png" alt=""><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6abcacdef88ee1436cafbcda.png" alt=""><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6af194291ac4234dcd10fd0a.jpg" alt=""><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6ab44e75f07a3cb6d49ab62a.png" alt=""><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6af195e23f4edcbb005dcaec.jpeg" alt=""></div></div><h3>Tell us what you are picturing</h3><p>A sauna, hot tub, cold plunge or something else. Tick as many as you like.</p></div>
+      <div class="polar reveal"><span class="big">2</span><div class="ph"><div class="quad"><img src="https://files.leadconnectorhq.com/file/6a97d1d2a227fec6bda89a0f/lee-evans-sauna-area-1.jpeg" alt="A garden before"><img src="https://files.leadconnectorhq.com/file/6a9ca9b9e29b3baf97db33eb/photo-2023-06-11-12-47-54.jpg" alt="A garden before"><img src="https://files.leadconnectorhq.com/file/6aa90fd9196984c408f6217c/whatsapp-image-2026-09-10-at-00-31-01-5.jpeg" alt="A garden before"><div class="q"><span class="qm">?</span><span>Your garden next</span></div></div></div><h3>Send photos of your space</h3><p>A couple of wide phone photos of where it would go, like these, is all we need.</p></div>
+      <div class="polar reveal"><span class="big">3</span><div class="ph"><div class="quad"><img src="https://files.leadconnectorhq.com/file/6a97d8dac7069f4fc7b1d685/after.png" alt="A garden after"><img src="https://files.leadconnectorhq.com/file/6a9caa1be29b3baf97db3aa7/photo-2023-06-11-17-19-18.jpg" alt="A garden after"><img src="https://files.leadconnectorhq.com/file/6aa5f73a9f8b31b6abd9b9b9/corner-sanctuary.jpg" alt="A garden after"><div class="q"><span class="qm">?</span><span>This could be yours</span></div></div></div><h3>Get your presentation</h3><p>Made by hand and sent to your inbox, ready to talk through.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ba dark">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="note">Real gardens <svg viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v11M1.5 8L6 12.5 10.5 8"/></svg></div>
+      <h2>Same garden, before and after</h2>
+      <p class="lede">This is the kind of change your presentation shows you, in your own space.</p>
+    </div>
+    <div class="tabs" id="tabs">
+      <button type="button" class="tab on" data-i="0">Garden one</button>
+      <button type="button" class="tab" data-i="1">Garden two</button>
+      <button type="button" class="tab" data-i="2">Garden three</button>
+    </div>
+    <div class="pair">
+      <div class="polar"><span class="chip">Before</span><div class="ph"><img id="baBefore" src="" alt="Garden before"></div></div>
+      <div class="arrow"><svg viewBox="0 0 26 26" fill="none" stroke-width="1.8"><path d="M4 13h17M15 7l6 6-6 6"/></svg></div>
+      <div class="polar"><span class="chip after">After</span><div class="ph"><img id="baAfter" src="" alt="Garden after"></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="formsec" id="apply">
+  <div class="wrap">
+    <div class="head reveal">
+      <div class="note">Claim your spot <svg viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v11M1.5 8L6 12.5 10.5 8"/></svg></div>
+      <h2>Five quick steps, two minutes</h2>
+      <p>We only take ten gardens a round, because every presentation is made by hand.</p>
+    </div>
+    <div class="grid">
+      <div class="card" id="card"></div>
+      <aside class="sum" id="sum"></aside>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap reveal">
+    <div class="note" style="color:rgba(255,255,255,0.7);">Made in Wales <svg viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v11M1.5 8L6 12.5 10.5 8"/></svg></div>
+    <h2>Built to order in our own workshop</h2>
+    <p>Nothing comes off a shelf. We either build it here and deliver, or bring the materials and build it at yours in a day.</p>
+    <a class="pill white" href="#apply">Claim a spot<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 8h11M9 4l4 4-4 4"/></svg></a>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap inner">
+    <div class="reveal">
+      <div class="note">Good to know <svg viewBox="0 0 12 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 1v11M1.5 8L6 12.5 10.5 8"/></svg></div>
+      <h2>Questions before you claim</h2>
+    </div>
+    <div id="faq">
+      <div class="qa open"><button type="button">What does it cost?</button><div class="a"><p>Nothing. This round is on us.</p></div></div>
+      <div class="qa"><button type="button">How long does it take?</button><div class="a"><p>Every presentation is made by hand, so allow a few days. It lands in your inbox when it is ready.</p></div></div>
+      <div class="qa"><button type="button">What photos work best?</button><div class="a"><p>Wide shots taken in daylight from where you would look at it, plus one closer shot of the ground where it would sit.</p></div></div>
+      <div class="qa"><button type="button">Do I have to buy anything?</button><div class="a"><p>No. The presentation is yours to keep either way. If you like what you see, you can book a design call to talk it through.</p></div></div>
+      <div class="qa"><button type="button">Why only ten?</button><div class="a"><p>Each one is made by hand, so we keep every round small. When the ten spots are gone, you can join the waitlist for the next round.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <img class="logo" src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/6a159cbca7ceea4e5718f77f.png" alt="Barrel Sauna UK">
+    <div class="signoff">The Barrel Sauna UK Team</div>
+    <div class="dom">barrelsaunauk.com</div>
+    <div class="sigcard"><img src="https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/bf18840a-71c4-4a73-abb9-6505c182f33d.jpg" alt="Barrel Sauna UK signature banner"></div>
+  </div>
+</footer>
+
+<div class="dev">
+  <details>
+    <summary>Preview only: test the cap and see what GHL receives</summary>
+    <div class="ctrl">
+      <button class="back" id="devFull" type="button">Show the round is full state</button>
+      <button class="back" id="devReset" type="button">Reset to 6 spots left</button>
+    </div>
+    <pre id="devOut">Submit the form to see the contact fields and tags it would write into GHL.</pre>
+  </details>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var B='https://assets.cdn.filesafe.space/J378Bt0d7JvG2rXks3zo/media/';
+  var BEFORES=["https://files.leadconnectorhq.com/file/6a97d1d2a227fec6bda89a0f/lee-evans-sauna-area-1.jpeg", "https://files.leadconnectorhq.com/file/6a9ca9b9e29b3baf97db33eb/photo-2023-06-11-12-47-54.jpg", "https://files.leadconnectorhq.com/file/6aa90fd9196984c408f6217c/whatsapp-image-2026-09-10-at-00-31-01-5.jpeg"], AFTERS=["https://files.leadconnectorhq.com/file/6a97d8dac7069f4fc7b1d685/after.png", "https://files.leadconnectorhq.com/file/6a9caa1be29b3baf97db3aa7/photo-2023-06-11-17-19-18.jpg", "https://files.leadconnectorhq.com/file/6aa5f73a9f8b31b6abd9b9b9/corner-sanctuary.jpg"];
+  var CAP=10, taken=4;
+  var products=[
+    {id:'barrel',label:'Classic barrel sauna',img:B+'6a9b2fe2ac5d03a1095eafc7.png'},
+    {id:'modern',label:'Modern square or cube sauna',img:B+'6ac8b5f489da6e6f9bd0c01f.png'},
+    {id:'mobile',label:'Mobile sauna trailer',img:B+'6abcacdef88ee1436cafbcda.png'},
+    {id:'hottub',label:'Hot tub',img:B+'6af194291ac4234dcd10fd0a.jpg'},
+    {id:'plunge',label:'Cold plunge or ice bath',img:B+'6ab44e75f07a3cb6d49ab62a.png'},
+    {id:'shower',label:'Outdoor shower',img:B+'6af195e23f4edcbb005dcaec.jpeg'},
+    {id:'hut',label:"Shepherd's hut",img:B+'6a9c80a3e29b3baf97d7ca43.png'},
+    {id:'pod',label:'Glamping pod',img:B+'6aa1597bd953a0128b482fe8.jpg'},
+    {id:'unsure',label:'Not sure yet'}
+  ];
+  var plabel={}; products.forEach(function(p){plabel[p.id]=p.label;});
+  var SPACE=[{id:'small',l:'A compact corner, under 3m'},{id:'medium',l:'Medium, 3 to 4m'},{id:'large',l:'Plenty, 5m or more'},{id:'unsure',l:'Not sure, I need help measuring'}];
+  var READY=[{id:'ready',l:'Yes, there is a level base'},{id:'work',l:'It needs some work'},{id:'help',l:'I need help building one'},{id:'unsure',l:'Not sure'}];
+  var TIME=[{id:'3m',l:'Within 3 months'},{id:'6m',l:'3 to 6 months'},{id:'12m',l:'6 to 12 months'},{id:'research',l:'Just looking for now'}];
+  function lab(list,id){for(var i=0;i<list.length;i++){if(list[i].id===id)return list[i].l;}return '';}
+  function esc(t){return String(t).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  var st,cur,mode='form';
+  function fresh(){st={products:[],space:'',ready:'',time:'',photos:[],name:'',email:'',phone:'',postcode:''};cur=0;}
+  fresh();
+  var card=document.getElementById('card'), sum=document.getElementById('sum');
+  var TITLES=['What are you picturing?','Tell us about the space','When would you like it?','Send us your photos','Where do we send it?'];
+  function left(){return Math.max(0,CAP-taken);}
+
+  function heroState(){
+    document.getElementById('heroLive').textContent=left()?'Round one is open':'Round one is full';
+    document.getElementById('heroBtnTxt').textContent=left()?'Claim a spot':'Join the waitlist';
+    var h='';for(var i=0;i<CAP;i++)h+='<i'+(i<taken?' class="t"':'')+'></i>';
+    document.getElementById('heroSeats').innerHTML=h;
+    document.getElementById('heroSeatTxt').textContent=left()?left()+' of 10 spots left':'All 10 spots taken';
+  }
+
+  function can(){
+    if(cur===0) return st.products.length>0;
+    if(cur===1) return st.space && st.ready;
+    if(cur===2) return !!st.time;
+    if(cur===3) return st.photos.length>0;
+    return st.name.trim() && /.+@.+\..+/.test(st.email) && st.phone.trim() && st.postcode.trim();
+  }
+
+  function render(){
+    heroState();
+    if(mode==='full'){renderFull();renderSum();return;}
+    if(mode==='done'){renderDone();renderSum();return;}
+    var h='<div class="prog">';
+    for(var i=0;i<5;i++) h+='<span'+(i<=cur?' class="on"':'')+'></span>';
+    h+='</div><div class="stepnum">Step '+(cur+1)+' of 5</div><h3>'+TITLES[cur]+'</h3>';
+    if(cur===0){
+      h+='<p class="help">Tick everything you are thinking about.</p><div class="tiles">';
+      products.forEach(function(p){
+        var on=st.products.indexOf(p.id)>-1;
+        h+='<button type="button" class="tile'+(on?' sel':'')+'" data-p="'+p.id+'"><span class="tick">&#10003;</span><div class="ph">'+(p.img?'<img src="'+p.img+'" alt="">':'<div class="q">?</div>')+'</div><div class="lab">'+esc(p.label)+'</div></button>';
+      });
+      h+='</div>';
+    }else if(cur===1){
+      h+='<p class="help">Rough is fine. We will check the details from your photos.</p><div class="sub">How much room is there?</div><div class="opts">';
+      SPACE.forEach(function(o){h+='<button type="button" class="opt'+(st.space===o.id?' sel':'')+'" data-k="space" data-v="'+o.id+'">'+o.l+'</button>';});
+      h+='</div><div class="sub">Is the spot ready?</div><div class="opts">';
+      READY.forEach(function(o){h+='<button type="button" class="opt'+(st.ready===o.id?' sel':'')+'" data-k="ready" data-v="'+o.id+'">'+o.l+'</button>';});
+      h+='</div>';
+    }else if(cur===2){
+      h+='<p class="help">Every build is made to order, so this helps us plan.</p><div class="opts">';
+      TIME.forEach(function(o){h+='<button type="button" class="opt'+(st.time===o.id?' sel':'')+'" data-k="time" data-v="'+o.id+'">'+o.l+'</button>';});
+      h+='</div>';
+    }else if(cur===3){
+      h+='<p class="help">Up to five photos of where it would go.</p>'+
+        '<label class="drop" for="file"><svg viewBox="0 0 36 36" fill="none" stroke-width="1.5"><rect x="4" y="9" width="28" height="21" rx="3"/><circle cx="18" cy="19.5" r="5.5"/><path d="M12 9l2-4h8l2 4"/></svg><div class="big">Tap to add photos</div><div class="sm">JPG or PNG from your phone or computer</div></label>'+
+        '<input type="file" id="file" accept="image/*" multiple hidden>'+
+        '<div class="thumbs" id="thumbs"></div>'+
+        '<p class="tips">Best results: one wide photo from where you would look at it, and one closer shot of the ground.</p>';
+    }else{
+      h+='<p class="help">Your presentation lands in your inbox when it is ready.</p><div class="fields">'+
+        fld('name','Name','text','name')+fld('email','Email','email','email')+fld('phone','Mobile','tel','tel')+fld('postcode','Postcode','text','postal-code')+
+        '</div><p class="fine">We will use these details to send your presentation and to follow up about your build. Each presentation is made by hand, so please allow a few days.</p>';
+    }
+    h+='<div class="nav"><button type="button" class="back'+(cur===0?' hide':'')+'" id="bk">Back</button><button type="button" class="pill dark" id="nx"'+(can()?'':' disabled')+'>'+(cur===4?'Claim my spot':'Next')+'</button></div>';
+    card.innerHTML=h;
+    wire(); renderSum(); if(cur===3) drawThumbs();
+  }
+  function fld(k,l,t,ac){return '<div class="field"><label for="f_'+k+'">'+l+'</label><input id="f_'+k+'" data-f="'+k+'" type="'+t+'" autocomplete="'+ac+'" value="'+esc(st[k])+'"></div>';}
+
+  function wire(){
+    Array.prototype.forEach.call(card.querySelectorAll('.tile'),function(b){b.addEventListener('click',function(){
+      var v=b.getAttribute('data-p'),i=st.products.indexOf(v); if(i>-1)st.products.splice(i,1);else st.products.push(v); render();});});
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'),function(b){b.addEventListener('click',function(){
+      st[b.getAttribute('data-k')]=b.getAttribute('data-v'); render();});});
+    Array.prototype.forEach.call(card.querySelectorAll('input[data-f]'),function(inp){inp.addEventListener('input',function(){
+      st[inp.getAttribute('data-f')]=inp.value; document.getElementById('nx').disabled=!can(); renderSum();});});
+    var f=document.getElementById('file');
+    if(f) f.addEventListener('change',function(){
+      var files=Array.prototype.slice.call(f.files,0,5-st.photos.length);
+      files.forEach(function(file){var r=new FileReader();r.onload=function(e){st.photos.push({name:file.name,src:e.target.result});drawThumbs();renderSum();document.getElementById('nx').disabled=!can();};r.readAsDataURL(file);});
+    });
+    document.getElementById('nx').addEventListener('click',function(){
+      if(!can())return; if(cur<4){cur++;render();top();}else{taken++;mode='done';render();dev();top();}
+    });
+    document.getElementById('bk').addEventListener('click',function(){if(cur>0){cur--;render();}});
+  }
+  function drawThumbs(){
+    var t=document.getElementById('thumbs'); if(!t)return;
+    t.innerHTML=st.photos.map(function(p,i){return '<div class="t"><img src="'+p.src+'" alt=""><button type="button" data-i="'+i+'">&#215;</button></div>';}).join('');
+    Array.prototype.forEach.call(t.querySelectorAll('button'),function(b){b.addEventListener('click',function(){st.photos.splice(+b.getAttribute('data-i'),1);drawThumbs();renderSum();document.getElementById('nx').disabled=!can();});});
+  }
+  function top(){var a=document.getElementById('apply').getBoundingClientRect();if(a.top<0)document.getElementById('apply').scrollIntoView({behavior:'smooth'});}
+
+  function renderSum(){
+    function row(k,v){return '<div class="row"><div class="k">'+k+'</div><div class="v'+(v?'':' empty')+'">'+(v||'Not chosen yet')+'</div></div>';}
+    var photos=st.photos.length?'<div class="mini">'+st.photos.map(function(p){return '<img src="'+p.src+'" alt="">';}).join('')+'</div>':'';
+    var bars='';for(var i=0;i<CAP;i++)bars+='<i'+(i<taken?' class="t"':'')+'></i>';
+    sum.innerHTML='<div class="head"><div class="t">Your garden</div><div class="s">Fills in as you go</div></div><div class="body">'+
+      row('Picturing',st.products.map(function(p){return esc(plabel[p]);}).join(', '))+
+      row('Room',lab(SPACE,st.space))+row('Spot',lab(READY,st.ready))+row('Timing',lab(TIME,st.time))+
+      '<div class="row"><div class="k">Photos</div><div class="v'+(st.photos.length?'':' empty')+'">'+(st.photos.length?st.photos.length+' added':'None yet')+'</div>'+photos+'</div>'+
+      '<div class="spots">'+(left()?left()+' of 10 spots left this round':'This round is full')+'<div class="row2">'+bars+'</div></div></div>';
+  }
+
+  function renderDone(){
+    card.innerHTML='<div class="done"><div class="badge">&#10003;</div><div class="note" style="justify-content:center;">You are in</div>'+
+      '<h3>Spot '+taken+' of 10 is yours</h3>'+
+      '<p>Thanks, '+esc(st.name.split(' ')[0])+'. We have your photos and your wish list. Your presentation is made by hand, so give us a few days and it will land at '+esc(st.email)+'.</p>'+
+      '<div class="next"><div><span class="nb">Now</span>A confirmation email is on its way.</div><div><span class="nb">In a few days</span>Your presentation, your build in your garden.</div><div><span class="nb">Then</span>Book a design call to talk it through.</div></div>'+
+      '<button type="button" class="back" id="again" style="margin-top:14px;">Start again</button></div>';
+    document.getElementById('again').addEventListener('click',function(){fresh();mode=left()?'form':'full';render();});
+  }
+  function renderFull(){
+    card.innerHTML='<div class="done"><div class="note" style="justify-content:center;">This round is full</div>'+
+      '<h3>All ten spots are taken</h3><p>Leave your email and we will let you know as soon as the next round opens.</p>'+
+      '<div class="fields" style="max-width:420px;margin:0 auto;grid-template-columns:1fr;text-align:left;">'+fld('name','Name','text','name')+fld('email','Email','email','email')+'</div>'+
+      '<div style="margin-top:20px;"><button type="button" class="pill dark" id="wl">Join the waitlist</button></div></div>';
+    Array.prototype.forEach.call(card.querySelectorAll('input[data-f]'),function(inp){inp.addEventListener('input',function(){st[inp.getAttribute('data-f')]=inp.value;});});
+    document.getElementById('wl').addEventListener('click',function(){
+      document.getElementById('devOut').textContent=JSON.stringify({contact:{name:st.name,email:st.email},tags:['garden presentation waitlist']},null,2);
+      card.querySelector('.done').innerHTML='<div class="badge">&#10003;</div><h3>You are on the list</h3><p>You will hear from us when the next round opens.</p>';
+    });
+  }
+  function dev(){
+    document.getElementById('devOut').textContent=JSON.stringify({
+      contact:{firstName:st.name.split(' ')[0],email:st.email,phone:st.phone,postalCode:st.postcode},
+      customFields:{
+        presentation_products:st.products.map(function(p){return plabel[p];}),
+        presentation_space:lab(SPACE,st.space),
+        presentation_spot_ready:lab(READY,st.ready),
+        presentation_timeframe:lab(TIME,st.time),
+        presentation_photos:st.photos.map(function(p){return p.name+' (uploaded file)';}),
+        presentation_spot_number:taken+' of '+CAP
+      },
+      tags:['garden presentation','garden presentation - to make'],
+      task:'Make garden presentation for '+st.name+' (due in 3 working days)'
+    },null,2);
+  }
+
+  /* before and after tabs */
+  var bb=document.getElementById('baBefore'), aa=document.getElementById('baAfter');
+  function showPair(i){
+    bb.style.opacity=aa.style.opacity=0;
+    setTimeout(function(){bb.src=BEFORES[i];aa.src=AFTERS[i];bb.style.opacity=aa.style.opacity=1;},180);
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'),function(t){t.classList.toggle('on',+t.getAttribute('data-i')===i);});
+  }
+  bb.src=BEFORES[0]; aa.src=AFTERS[0];
+  Array.prototype.forEach.call(document.querySelectorAll('.tab'),function(t){t.addEventListener('click',function(){showPair(+t.getAttribute('data-i'));});});
+
+  /* faq */
+  Array.prototype.forEach.call(document.querySelectorAll('.qa button'),function(b){b.addEventListener('click',function(){b.parentNode.classList.toggle('open');});});
+
+  /* reveal on scroll */
+  var els=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});
+    Array.prototype.forEach.call(els,function(el){io.observe(el);});
+  }else{Array.prototype.forEach.call(els,function(el){el.classList.add('in');});}
+
+  document.getElementById('devFull').addEventListener('click',function(){taken=CAP;fresh();mode='full';render();});
+  document.getElementById('devReset').addEventListener('click',function(){taken=4;fresh();mode='form';render();});
+  render();
+})();
+</script>
+</body>
+</html>
